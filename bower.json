@@ -1,0 +1,25 @@
+{
+  "name": "meu-fretado",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Thomas Nunes"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "fretado"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "milligram": "^1.1.0"
+  }
+}
