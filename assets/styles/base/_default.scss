@@ -2,3 +2,16 @@
 body {
 	background-color: $white;
 }
+html, body, section {
+	height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.section-map {
+	background-color: $space-gray;
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    width: 76%;
+}

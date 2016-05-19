@@ -45,7 +45,7 @@ gulp.task('lint', function() {
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('./assets/scripts/*.js', ['lint', 'scripts']);
-    gulp.watch('./assets/styles/**/*.scss', ['styles','minify-css']);
+    gulp.watch(['./assets/styles/**/*.scss', './assets/styles/**/**/*.scss'],['styles','minify-css']);
 });
 
 // Default Task

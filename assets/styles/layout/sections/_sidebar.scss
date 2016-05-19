@@ -1,0 +1,14 @@
+.sidebar {
+    border-right: 1px solid $space-gray;
+    display: inline-block;
+    height: 100%;
+    padding: 15px;
+    vertical-align: top;
+    width: 23%;
+
+    ul li {
+	    font-size: 12px;
+	    line-height: 1.4em;
+	    text-transform: lowercase;
+    }
+}

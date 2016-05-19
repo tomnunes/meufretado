@@ -1,80 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
 
-<link rel="stylesheet" type="text/css" href="./dist/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./dist/css/styles.css" />
 
-<title>Meu Fretado</title>
+    <title>Meu Fretado</title>
+    </head>
+    <body>
+        <header class="header-core">Header</header>
+        <section>
+            <div class="sidebar">
+                <ul>
+                    <li>AV. JAPÃO X R. BRÁS DE PINA - POSTO DE GASOLINA</li>
+                    <li>AV. JAPÃO - COND. NOTRE DAME</li>
+                    <li>AV. JAPÃO - PADARIA VILA CLÉO</li>
+                    <li>R. DOM LUIZ DE SOUZA - COND. AQUARIUS</li>
+                    <li>R. DOM LUIZ DE SOUZA - POSTO DE SAÚDE</li>
+                    <li>R. SANTA EFIGÊNIA X R. SANTA BARBARA</li>
+                    <li>R.THULLER - INICIO DA RUA</li>
+                    <li>R. THULLER - PÇ. IGREJA IMACULADA CONCEIÇÃO</li>
+                    <li>R. THULLER - SUPERMERCADO PANDA</li>
+                    <li>R. THULLER - PADARIA BAIRRO ALTO</li>
+                    <li>R. GERALDO GOMES LOUREIRO - ANTIGA UNICOR</li>
+                    <li>R. ONÓFRICO DERÊNCIO</li>
+                    <li>AV. JAPÃO X AV. HENRIQUE PERES - POSTO BR (PERIMETRAL)</li>
+                    <li>AV. HENRIQUE EROLES - ALTURA DO Nº 2075</li>
+                    <li>AV. HENRIQUE EROLES - CONDOMINIO HELBOR PARK</li>
+                    <li>R. MARIA O. VALE X R. RAULINDO PAIVA - PÇ. ANTONIO C. FILHO</li>
+                    <li>R. MARIA OSORIO DO VALLE - GINÁSIO PEDRO MALOZZI</li>
+                    <li>R. MARIA OSORIO VALE X R. IPIRANGA</li>
+                    <li>R. CAMPOS SALES - PADARIA NAVAL</li>
+                    <li>R. CASAREJOS X R. CABO D. OLIVER</li>
+                    <li>R. CABO D. OLIVER X R. JOSÉ B. BRAGA - COLÉGIO GÊNESIS</li>
+                    <li>BALDEAÇÃO - SUS / MOGILAR - CARROS 2, 5, 7, 12, 13, 16, 17 E 22.</li>
+                    <li>MARGINAL TIETE - TERMINAL TIETE - METRO TIETE</li>
+                    <li>MARGINAL PINHEIROS - PONTE CIDADE JARDIM</li>
+                    <li>AV. LUIZ C. BERRINI - BOLSÃO / SURUBIM</li>
+                    <li>AV. LUIZ C. BERRINI - BOLSÃO BERRINI / IRMÃ GABRIELA</li>
+                    <li>AV. LUIZ C. BERRINI - BOLSÃO BERRINI / R. ARIZONA</li>
+                    <li>AV. DR. CHUCRI ZAIDAN - PONTE MORUMBI</li>
+                    <li>AV. HENRI DUNANT</li>
+                    <li>AV. ANTONIO DE OLIVEIRA X ENGº MESQUITA SAMPAIO</li>
+                    <li>R. ENGº MESQUITA SAMPAIO X R. JOSÉ GUERRA</li>
+                    <li>R. JOSÉ GUERRA AV. ALEXANDRE DUMAS</li>
+                    <li>R. JOSÉ GUERRA X R. VERBO DIVINO</li>
+                    <li>AV. LUIZ SERAPHICO JUNIOR</li>
+                </ul>
+            </div>
+            <div id="map" class="section-map"></div>
+        </section>
+        <footer class="footer-core"></footer>
 
-<style>
-.sidebar {
-    border-right: 1px solid #999;
-    display: inline-block;
-    height: 100%;
-    padding: 15px 25px;
-    vertical-align: top;
-    width: 23%;
-}
-.sidebar ul li {
-    font-size: 12px;
-    line-height: 1.4em;
-    text-transform: lowercase;
-}
-#map {
-    display: inline-block;
-    height: 100%;
-    vertical-align: top;
-    width: 76%;
-}
-</style>
-</head>
-<body>
-
-<section>
-    <div class="sidebar">
-        <ul>
-            <li>AV. JAPÃO X R. BRÁS DE PINA - POSTO DE GASOLINA</li>
-            <li>AV. JAPÃO - COND. NOTRE DAME</li>
-            <li>AV. JAPÃO - PADARIA VILA CLÉO</li>
-            <li>R. DOM LUIZ DE SOUZA - COND. AQUARIUS</li>
-            <li>R. DOM LUIZ DE SOUZA - POSTO DE SAÚDE</li>
-            <li>R. SANTA EFIGÊNIA X R. SANTA BARBARA</li>
-            <li>R.THULLER - INICIO DA RUA</li>
-            <li>R. THULLER - PÇ. IGREJA IMACULADA CONCEIÇÃO</li>
-            <li>R. THULLER - SUPERMERCADO PANDA</li>
-            <li>R. THULLER - PADARIA BAIRRO ALTO</li>
-            <li>R. GERALDO GOMES LOUREIRO - ANTIGA UNICOR</li>
-            <li>R. ONÓFRICO DERÊNCIO</li>
-            <li>AV. JAPÃO X AV. HENRIQUE PERES - POSTO BR (PERIMETRAL)</li>
-            <li>AV. HENRIQUE EROLES - ALTURA DO Nº 2075</li>
-            <li>AV. HENRIQUE EROLES - CONDOMINIO HELBOR PARK</li>
-            <li>R. MARIA O. VALE X R. RAULINDO PAIVA - PÇ. ANTONIO C. FILHO</li>
-            <li>R. MARIA OSORIO DO VALLE - GINÁSIO PEDRO MALOZZI</li>
-            <li>R. MARIA OSORIO VALE X R. IPIRANGA</li>
-            <li>R. CAMPOS SALES - PADARIA NAVAL</li>
-            <li>R. CASAREJOS X R. CABO D. OLIVER</li>
-            <li>R. CABO D. OLIVER X R. JOSÉ B. BRAGA - COLÉGIO GÊNESIS</li>
-            <li>BALDEAÇÃO - SUS / MOGILAR - CARROS 2, 5, 7, 12, 13, 16, 17 E 22.</li>
-            <li>MARGINAL TIETE - TERMINAL TIETE - METRO TIETE</li>
-            <li>MARGINAL PINHEIROS - PONTE CIDADE JARDIM</li>
-            <li>AV. LUIZ C. BERRINI - BOLSÃO / SURUBIM</li>
-            <li>AV. LUIZ C. BERRINI - BOLSÃO BERRINI / IRMÃ GABRIELA</li>
-            <li>AV. LUIZ C. BERRINI - BOLSÃO BERRINI / R. ARIZONA</li>
-            <li>AV. DR. CHUCRI ZAIDAN - PONTE MORUMBI</li>
-            <li>AV. HENRI DUNANT</li>
-            <li>AV. ANTONIO DE OLIVEIRA X ENGº MESQUITA SAMPAIO</li>
-            <li>R. ENGº MESQUITA SAMPAIO X R. JOSÉ GUERRA</li>
-            <li>R. JOSÉ GUERRA AV. ALEXANDRE DUMAS</li>
-            <li>R. JOSÉ GUERRA X R. VERBO DIVINO</li>
-            <li>AV. LUIZ SERAPHICO JUNIOR</li>
-        </ul>
-    </div>
-    <div id="map"></div>
-</section>
-
-<script type="text/javascript" src=".dist/js/scripts.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfs_TKkGzyirG-F5gekvSsJM7WLa53Bpg&signed_in=true" async defer></script>
-</body>
+        <script type="text/javascript" src=".dist/js/scripts.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfs_TKkGzyirG-F5gekvSsJM7WLa53Bpg&signed_in=true" async defer></script>
+    </body>
 </html>
