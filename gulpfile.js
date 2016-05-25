@@ -27,7 +27,7 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('scripts', function () {
-    gulp.src('./assets/components/scripts/app.js')
+    gulp.src('./assets/scripts/app.js')
         .pipe(concat('scripts.js'))
         .pipe(gulp.dest('./dist/js'));
 
@@ -36,15 +36,15 @@ gulp.task('scripts', function () {
 });
 
 // Lint Task
-gulp.task('lint', function() {
-    return gulp.src('.assets/scripts/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
-});
+// gulp.task('lint', function() {
+//     return gulp.src('.assets/scripts/*.js')
+//         .pipe(jshint())
+//         .pipe(jshint.reporter('default'));
+// });
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('./assets/scripts/*.js', ['lint', 'scripts']);
+    gulp.watch('./assets/scripts/*.js', ['scripts']);
     gulp.watch(['./assets/styles/**/*.scss', './assets/styles/**/**/*.scss'],['styles','minify-css']);
 });
 
