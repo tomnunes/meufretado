@@ -1,4 +1,4 @@
-.header-core {
+.mf_header {
 	background-color: $kettle;
 	text-align: center;
 	padding: gutter(5);
@@ -14,14 +14,12 @@
 		margin: 0;
 	}
 	h1 {
-		font-size: 30px;
-		margin-bottom: gutter(5);
-
-		@media screen and (min-width: $screen-width) {
-			margin-bottom: gutter(9);
-		}
+		font-size: 25px;
+		font-weight: 700;
+		margin-bottom: 10px;
 	}
 	h2 {
+		font-weight: normal;
 		font-size: 16px;
 	}
 }

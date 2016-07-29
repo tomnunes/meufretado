@@ -17,15 +17,10 @@ $susy: (
 body {
 	background-color: $white;
 	font-family: $primary, 'sans-serif';
-}
-html, body, section {
-	height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+	color: $black;
 }
 
-.container {
+.mf_limit {
 	max-width: $screen-width;
 	width: 90%;
 	margin-left: auto;
@@ -34,11 +29,11 @@ html, body, section {
 
 	&:before,
 	&:after {
-		@extend .psf_clear-fix;
+		@extend .mf_clear-fix;
 	}
 }
 
-.psf_clear-fix {
+.mf_clear-fix {
 	clear:both;
 	content:".";
 	display:block;
