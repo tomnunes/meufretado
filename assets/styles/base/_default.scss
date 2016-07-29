@@ -1,10 +1,49 @@
+// FONTS
+$primary: 'Roboto';
+
+// Screen
+$screen-width: 960px;
+
+// SUSY
+$susy: (
+    columns: 12,
+    container: 960px,
+    gutters: 1/4,
+    global-box-sizing: border-box,
+    debug: (image: hide)
+);
+
 // Default Styles
 body {
 	background-color: $white;
+	font-family: $primary, 'sans-serif';
 }
 html, body, section {
 	height: 100%;
     margin: 0;
     padding: 0;
     width: 100%;
+}
+
+.container {
+	max-width: $screen-width;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+
+	&:before,
+	&:after {
+		@extend .psf_clear-fix;
+	}
+}
+
+.psf_clear-fix {
+	clear:both;
+	content:".";
+	display:block;
+	font-size:0;
+	line-height:0;
+	height:0;
+	overflow:hidden;
 }

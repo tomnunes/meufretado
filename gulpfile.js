@@ -12,10 +12,11 @@ gulp.task('styles', function() {
     return gulp.src('./assets/styles/application.scss')
         .pipe(sass({
             includePaths: [
-            './assets/components/'
+            './assets/components/',
+            './node_modules/'
             ]
         }))
-        .pipe(concat('styles.css'))
+        .pipe(concat('styles.min.css'))
         .pipe(cleanCSS())
         .pipe(gulp.dest('./dist/css'));
 });
@@ -36,17 +37,17 @@ gulp.task('scripts', function () {
 });
 
 // Lint Task
-// gulp.task('lint', function() {
-//     return gulp.src('.assets/scripts/*.js')
-//         .pipe(jshint())
-//         .pipe(jshint.reporter('default'));
-// });
+gulp.task('lint', function() {
+    return gulp.src('./assets/scripts/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
+});
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('./assets/scripts/*.js', ['scripts']);
+    gulp.watch('./assets/scripts/*.js', ['scripts','lint']);
     gulp.watch(['./assets/styles/**/*.scss', './assets/styles/**/**/*.scss'],['styles','minify-css']);
 });
 
 // Default Task
-gulp.task('default', ['styles','minify-css','scripts']);
+gulp.task('default', ['styles','minify-css','scripts','lint']);

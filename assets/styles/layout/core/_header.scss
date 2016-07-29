@@ -1,3 +1,27 @@
 .header-core {
-	background-color: pink;
+	background-color: $kettle;
+	text-align: center;
+	padding: gutter(5);
+
+	@media screen and (min-width: $screen-width) {
+		padding: gutter(9);
+	}
+
+	h1,
+	h2 {
+		color: $white;
+		line-height: 1em;
+		margin: 0;
+	}
+	h1 {
+		font-size: 30px;
+		margin-bottom: gutter(5);
+
+		@media screen and (min-width: $screen-width) {
+			margin-bottom: gutter(9);
+		}
+	}
+	h2 {
+		font-size: 16px;
+	}
 }

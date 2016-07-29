@@ -1,7 +1,9 @@
 .section-map {
-	background-color: $space-gray;
-    display: inline-block;
-    height: 100%;
-    vertical-align: top;
-    width: 72%;
+	background-color: $white;
+    height: 500px;
+
+    @media screen and (min-width: $screen-width) {
+	    @include span(9 last);
+	    display: inline-block;
+	}
 }

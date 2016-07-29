@@ -1,55 +1,63 @@
 function initMap() {
-    var directionsService = new google.maps.DirectionsService;
-    var directionsDisplay = new google.maps.DirectionsRenderer;
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 7,
-        center: {lat: -23.53, lng: -46.62}
-    });
-    
-
-  var stops = [
-  "avenida japão, 250, mogi das cruzes, sp",
-    "rua dom luiz de souza, mogi das cruzes, sp",
-    "rua santa efigênia, mogi das cruzes, sp",
-    "rua santa efigênia 130, mogi das cruzes, sp",
-    "rua thuller 10, mogi das cruzes, sp",
-    "rua geraldo gomes loureiro 170, mogi das cruzes, sp",
-    "rua onófrico derêncio, mogi das cruzes, sp",
-    "avenida henrique eroles, mogi das cruzes, sp",
-    "rua maria osório do valle, mogi das cruzes, sp",
-    "rua ipiranga 1000, mogi das cruzes, sp",
-    "rua presidente campo sales, mogi das cruzes, sp",
-    "rua casarejos 10, mogi das cruzes, sp",
-    "avenida josé benedito braga 10, mogi das cruzes, sp",
-    "rua josé meloni 200, mogi das cruzes, sp"
-  ];
-
     var map = new window.google.maps.Map(document.getElementById("map"));
 
+    var stopsCollection = [
+    [
+    {"Geometry":{"Latitude":-23.53111,"Longitude":-46.20499}},
+    {"Geometry":{"Latitude":-23.53541,"Longitude":-46.20402}},
+    {"Geometry":{"Latitude":-23.54505,"Longitude":-46.20294}},
+    {"Geometry":{"Latitude":-23.54837,"Longitude":-46.20783}},
+    {"Geometry":{"Latitude":-23.54927,"Longitude":-46.20858}},
+    {"Geometry":{"Latitude":-23.54471,"Longitude":-46.21511}},
+    {"Geometry":{"Latitude":-23.54461,"Longitude":-46.21639}},
+    {"Geometry":{"Latitude":-23.54702,"Longitude":-46.21385}},
+    {"Geometry":{"Latitude":-23.54825,"Longitude":-46.21221}},
+    {"Geometry":{"Latitude":-23.55176,"Longitude":-46.20666}},
+    {"Geometry":{"Latitude":-23.55350,"Longitude":-46.20417}},
+    {"Geometry":{"Latitude":-23.55305,"Longitude":-46.20211}},
+    {"Geometry":{"Latitude":-23.54848,"Longitude":-46.20398}},
+    {"Geometry":{"Latitude":-23.53760,"Longitude":-46.20139}},
+    {"Geometry":{"Latitude":-23.53240,"Longitude":-46.20254}},
+    {"Geometry":{"Latitude":-23.52896,"Longitude":-46.19995}},
+    {"Geometry":{"Latitude":-23.52672,"Longitude":-46.20031}},
+    {"Geometry":{"Latitude":-23.51892,"Longitude":-46.20043}},
+    {"Geometry":{"Latitude":-23.51761,"Longitude":-46.20128}},
+    {"Geometry":{"Latitude":-23.51123,"Longitude":-46.19585}}
+    ]
+    ];
+
     // new up complex objects before passing them around
-    var directionsDisplay = new window.google.maps.DirectionsRenderer({suppressMarkers: true});
+    var directionsDisplay = new window.google.maps.DirectionsRenderer();
     var directionsService = new window.google.maps.DirectionsService();
 
-    Tour_startUp(stops);
-
+    Tour_startUp(stopsCollection);
     window.tour.loadMap(map, directionsDisplay);
-    window.tour.fitBounds(map);
 
-    if (stops.length > 1)
-        window.tour.calcRoute(directionsService, directionsDisplay);
+    if (stopsCollection.length > 0){
+        jQuery.each(stopsCollection, function (key, val){
+            if (val.length > 1){
+                directionsDisplay = new window.google.maps.DirectionsRenderer();
+                window.tour.calcRoute(directionsService, directionsDisplay, val);
+                directionsDisplay.setMap(map);
+                // show pins on the map
+                directionsDisplay.setOptions( { suppressMarkers: true } );
+            }
+        });
+    }
+    window.tour.fitBounds(map);
 }
 
-function Tour_startUp(stops) {
+function Tour_startUp(stopsCollection) {
     if (!window.tour) window.tour = {
         updateStops: function (newStops) {
-            stops = newStops;
+            stopsCollection = newStops;
         },
         // map: google map object
         // directionsDisplay: google directionsDisplay object (comes in empty)
         loadMap: function (map, directionsDisplay) {
             var myOptions = {
                 zoom: 13,
-                center: new window.google.maps.LatLng(-23.53, -46.62), // default to London
+                center: new window.google.maps.LatLng(51.507937, -0.076188), // default to London
                 mapTypeId: window.google.maps.MapTypeId.ROADMAP
             };
             map.setOptions(myOptions);
@@ -59,15 +67,15 @@ function Tour_startUp(stops) {
             var bounds = new window.google.maps.LatLngBounds();
 
             // extend bounds for each record
-/*
-            jQuery.each(stops, function (key, val) {
-                var myLatlng = new window.google.maps.LatLng(val.Geometry.Latitude, val.Geometry.Longitude);
-                bounds.extend(myLatlng);
+            jQuery.each(stopsCollection, function (key, val) {
+                jQuery.each(val, function(key2, val2){
+                    var myLatlng = new window.google.maps.LatLng(val2.Geometry.Latitude, val2.Geometry.Longitude);
+                    bounds.extend(myLatlng);
+                });
             });
             map.fitBounds(bounds);
-*/
         },
-        calcRoute: function (directionsService, directionsDisplay) {
+        calcRoute: function (directionsService, directionsDisplay, stops) {
             var batches = [];
             var itemsPerBatch = 10; // google API max = 10 - 1 start, 1 stop, and 8 waypoints
             var itemsCounter = 0;
@@ -80,7 +88,7 @@ function Tour_startUp(stops) {
                 for (var j = itemsCounter; j < stops.length; j++) {
                     subitemsCounter++;
                     subBatch.push({
-                        location: stops[j],
+                        location: new window.google.maps.LatLng(stops[j].Geometry.Latitude, stops[j].Geometry.Longitude),
                         stopover: true
                     });
                     if (subitemsCounter == itemsPerBatch)
@@ -90,7 +98,7 @@ function Tour_startUp(stops) {
                 itemsCounter += subitemsCounter;
                 batches.push(subBatch);
                 wayptsExist = itemsCounter < stops.length;
-                // If it runs again there are still points. Minus 1 before continuing to
+                // If it runs again there are still points. Minus 1 before continuing to 
                 // start up with end of previous tour leg
                 itemsCounter--;
             }
@@ -115,7 +123,7 @@ function Tour_startUp(stops) {
                     origin: start,
                     destination: end,
                     waypoints: waypts,
-                    travelMode: window.google.maps.TravelMode.WALKING
+                    travelMode: window.google.maps.TravelMode.DRIVING
                 };
                 (function (kk) {
                     directionsService.route(request, function (result, status) {
@@ -123,7 +131,7 @@ function Tour_startUp(stops) {
 
                             var unsortedResult = { order: kk, result: result };
                             unsortedResults.push(unsortedResult);
-
+                            
                             directionsResultsReturned++;
 
                             if (directionsResultsReturned == batches.length) // we've received all the results. put to map
@@ -137,7 +145,7 @@ function Tour_startUp(stops) {
                                             if (count == 0) // first results. new up the combinedResults object
                                                 combinedResults = unsortedResults[key].result;
                                             else {
-                                                // only building up legs, overview_path, and bounds in my consolidated object. This is not a complete
+                                                // only building up legs, overview_path, and bounds in my consolidated object. This is not a complete 
                                                 // directionResults object, but enough to draw a path on the map, which is all I need
                                                 combinedResults.routes[0].legs = combinedResults.routes[0].legs.concat(unsortedResults[key].result.routes[0].legs);
                                                 combinedResults.routes[0].overview_path = combinedResults.routes[0].overview_path.concat(unsortedResults[key].result.routes[0].overview_path);
@@ -150,19 +158,6 @@ function Tour_startUp(stops) {
                                     }
                                 }
                                 directionsDisplay.setDirections(combinedResults);
-                                var legs = combinedResults.routes[0].legs;
-                                // alert(legs.length);
-                                for (var i=0; i < legs.length;i++){
-          var markerletter = "A".charCodeAt(0);
-          markerletter += i;
-                                  markerletter = String.fromCharCode(markerletter);
-                                  createMarker(directionsDisplay.getMap(),legs[i].start_location,"marker"+i,"some text for marker "+i+"<br>"+legs[i].start_address,markerletter);
-                                }
-                                var i=legs.length;
-                                var markerletter = "A".charCodeAt(0);
-              markerletter += i;
-                                markerletter = String.fromCharCode(markerletter);
-                                createMarker(directionsDisplay.getMap(),legs[legs.length-1].end_location,"marker"+i,"some text for the "+i+"marker<br>"+legs[legs.length-1].end_address,markerletter);
                             }
                         }
                     });
@@ -170,88 +165,4 @@ function Tour_startUp(stops) {
             }
         }
     };
-}
-// var infowindow = new google.maps.InfoWindow(
-//   { 
-//     size: new google.maps.Size(150,50)
-//   });
-
-// var icons = new Array();
-// icons["red"] = new google.maps.MarkerImage("mapIcons/marker_red.png",
-//       // This marker is 20 pixels wide by 34 pixels tall.
-//       new google.maps.Size(20, 34),
-//       // The origin for this image is 0,0.
-//       new google.maps.Point(0,0),
-//       // The anchor for this image is at 9,34.
-//       new google.maps.Point(9, 34));
-
-
-
-// function getMarkerImage(iconStr) {
-//    if ((typeof(iconStr)=="undefined") || (iconStr==null)) { 
-//       iconStr = "red"; 
-//    }
-//    if (!icons[iconStr]) {
-//       icons[iconStr] = new google.maps.MarkerImage("http://www.google.com/mapfiles/marker"+ iconStr +".png",
-//       // This marker is 20 pixels wide by 34 pixels tall.
-//       new google.maps.Size(20, 34),
-//       // The origin for this image is 0,0.
-//       new google.maps.Point(0,0),
-//       // The anchor for this image is at 6,20.
-//       new google.maps.Point(9, 34));
-//    } 
-//    return icons[iconStr];
-
-// }
-  // Marker sizes are expressed as a Size of X,Y
-  // where the origin of the image (0,0) is located
-  // in the top left of the image.
- 
-  // Origins, anchor positions and coordinates of the marker
-  // increase in the X direction to the right and in
-  // the Y direction down.
-
-  // var iconImage = new google.maps.MarkerImage('mapIcons/marker_red.png',
-      // This marker is 20 pixels wide by 34 pixels tall.
-      // new google.maps.Size(20, 34),
-      // The origin for this image is 0,0.
-      // new google.maps.Point(0,0),
-      // The anchor for this image is at 9,34.
-      // new google.maps.Point(9, 34));
-  // var iconShadow = new google.maps.MarkerImage('http://www.google.com/mapfiles/shadow50.png',
-      // The shadow image is larger in the horizontal dimension
-      // while the position and offset are the same as for the main image.
-      // new google.maps.Size(37, 34),
-      // new google.maps.Point(0,0),
-      // new google.maps.Point(9, 34));
-      // Shapes define the clickable region of the icon.
-      // The type defines an HTML &lt;area&gt; element 'poly' which
-      // traces out a polygon as a series of X,Y points. The final
-      // coordinate closes the poly by connecting to the first
-      // coordinate.
-  var iconShape = {
-      coord: [9,0,6,1,4,2,2,4,0,8,0,12,1,14,2,16,5,19,7,23,8,26,9,30,9,34,11,34,11,30,12,26,13,24,14,21,16,18,18,16,20,12,20,8,18,4,16,2,15,1,13,0],
-      type: 'poly'
-  };
-
-
-function createMarker(map, latlng, label, html, color) {
-// alert("createMarker("+latlng+","+label+","+html+","+color+")");
-    var contentString = '<b>'+label+'</b><br>'+html;
-    var marker = new google.maps.Marker({
-        position: latlng,
-        map: map,
-        // shadow: iconShadow,
-        // icon: getMarkerImage(color),
-        shape: iconShape,
-        title: label,
-        zIndex: Math.round(latlng.lat()*-100000)<<5
-        });
-        marker.myname = label;
-
-    // google.maps.event.addListener(marker, 'click', function() {
-    //     infowindow.setContent(contentString); 
-    //     infowindow.open(map,marker);
-    //     });
-    // return marker;
 }
