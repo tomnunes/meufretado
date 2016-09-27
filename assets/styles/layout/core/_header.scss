@@ -1,25 +1,9 @@
 .mf_header {
-	background-color: $kettle;
+	border-bottom: 1px solid $kettle;
 	text-align: center;
-	padding: gutter(5);
+	padding: 15px 0;
 
-	@media screen and (min-width: $screen-width) {
-		padding: gutter(9);
-	}
-
-	h1,
-	h2 {
-		color: $white;
-		line-height: 1em;
-		margin: 0;
-	}
-	h1 {
-		font-size: 25px;
-		font-weight: 700;
-		margin-bottom: 10px;
-	}
-	h2 {
-		font-weight: normal;
-		font-size: 16px;
+	@media #{$breakpoint-medium} {
+		padding: 20px 0;
 	}
 }

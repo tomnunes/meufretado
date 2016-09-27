@@ -1,36 +1,44 @@
 // FONTS
 $primary: 'Roboto';
 
-// Screen
-$screen-width: 960px;
-
 // SUSY
-$susy: (
-    columns: 12,
-    container: 960px,
-    gutters: 1/4,
-    global-box-sizing: border-box,
-    debug: (image: hide)
-);
+// $susy: (
+//     columns: 12,
+//     container: 960px,
+//     gutters: 1/4,
+//     global-box-sizing: border-box,
+//     debug: (image: hide)
+// );
 
 // Default Styles
 body {
-	background-color: $white;
+	background-color: $surge-bg;
 	font-family: $primary, 'sans-serif';
-	color: $black;
+	color: $semi-black;
 }
 
-.mf_limit {
-	max-width: $screen-width;
-	width: 90%;
-	margin-left: auto;
-	margin-right: auto;
-	padding: 0;
-
-	&:before,
-	&:after {
-		@extend .mf_clear-fix;
-	}
+h1,
+h2 {
+  margin: 0;
+}
+h1 {
+  color: $semi-black;
+  font-size: 25px;
+  line-height: 1em;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+h2 {
+  color: rgba($semi-black, 0.7);
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 1.4em;
+}
+small {
+  color: rgba($semi-black, 0.5);
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.2em;
 }
 
 .mf_clear-fix {
@@ -41,4 +49,8 @@ body {
 	line-height:0;
 	height:0;
 	overflow:hidden;
+}
+
+.mf_content {
+  background-color: $white;
 }

@@ -28,11 +28,8 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('scripts', function () {
-    gulp.src('./assets/scripts/app.js')
+    return gulp.src(['./assets/components/jquery/dist/jquery.min.js','./assets/components/angular/angular.min.js','./assets/scripts/*.js'])
         .pipe(concat('scripts.js'))
-        .pipe(gulp.dest('./dist/js'));
-
-    return gulp.src('./assets/components/jquery/dist/jquery.min.js')
         .pipe(gulp.dest('./dist/js'));
 });
 
@@ -50,4 +47,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['styles','minify-css','scripts','lint']);
+gulp.task('default', ['styles','minify-css','scripts']);

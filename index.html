@@ -1,50 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="meu_fretado">
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 
     <link rel="stylesheet" type="text/css" href="./dist/css/styles.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
     <title>Meu Fretado</title>
   </head>
   <body>
     <header class="mf_header">
-        <h1>Meu Fretado</h1>
-        <h2>Busque seu fretado pelo mapa.</h2>
-    </header>
-    <section class="mf_content">
         <div class="mf_limit">
-            <dl class="mf_address-list">
-                <dt>Trajeto</dt>
-                <dd>
-                    <ul>
-                        <li>AV. JAPÃO X R. BRÁS DE PINA - POSTO DE GASOLINA</li>
-                        <li>AV. JAPÃO - COND. NOTRE DAME</li>
-                        <li>AV. JAPÃO - PADARIA VILA CLÉO</li>
-                        <li>R. DOM LUIZ DE SOUZA - COND. AQUARIUS</li>
-                        <li>R. DOM LUIZ DE SOUZA - POSTO DE SAÚDE</li>
-                        <li>R. SANTA EFIGÊNIA X R. SANTA BARBARA</li>
-                        <li>R.THULLER - INICIO DA RUA</li>
-                        <li>R. THULLER - PÇ. IGREJA IMACULADA CONCEIÇÃO</li>
-                        <li>R. THULLER - SUPERMERCADO PANDA</li>
-                        <li>R. THULLER - PADARIA BAIRRO ALTO</li>
-                        <li>R. GERALDO GOMES LOUREIRO - ANTIGA UNICOR</li>
-                        <li>R. ONÓFRICO DERÊNCIO</li>
-                        <li>AV. JAPÃO X AV. HENRIQUE PERES - POSTO BR (PERIMETRAL)</li>
-                        <li>AV. HENRIQUE EROLES - ALTURA DO Nº 2075</li>
-                        <li>AV. HENRIQUE EROLES - CONDOMINIO HELBOR PARK</li>
-                        <li>R. MARIA O. VALE X R. RAULINDO PAIVA - PÇ. ANTONIO C. FILHO</li>
-                        <li>R. MARIA OSORIO DO VALLE - GINÁSIO PEDRO MALOZZI</li>
-                        <li>R. MARIA OSORIO VALE X R. IPIRANGA</li>
-                        <li>R. CAMPOS SALES - PADARIA NAVAL</li>
-                        <li>R. CASAREJOS X R. CABO D. OLIVER</li>
-                        <li>R. CABO D. OLIVER X R. JOSÉ B. BRAGA - COLÉGIO GÊNESIS</li>
-                        <li>BALDEAÇÃO - SUS / MOGILAR - CARROS 2, 5, 7, 12, 13, 16, 17 E 22.</li>
-                    </ul>
-                </dd>
-            </dl>
+          <h1>Meu Fretado</h1>
+          <h2>Visualize o percurso dos fretados da AEMC pelo mapa. Assim fica mais fácil descobrir a linha ideal para você.</h2>
+          <!-- <small>*Por enquanto, para fretados AEMC</small> -->
+        </div>
+    </header>
+    <section class="mf_content" data-ng-controller="LinhasController as Linha">
+        <div class="mf_limit">
+          <dl class="mf_address-list">
+              <dt>{{ Linha.titulo }}</dt>
+              <dd>
+                  <ul>
+                    <li data-ng-repeat="rua in Linha.ruas">{{ rua.nome }}</li>
+                  </ul>
+              </dd>
+          </dl>
         </div>
         <div id="map" class="mf_map-section"></div>
     </section>
@@ -52,7 +34,6 @@
         <span>meufretado.com</span>
     </footer>
 
-    <script type="text/javascript" src="./dist/js/jquery.min.js"></script>
     <script type="text/javascript" src="./dist/js/scripts.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfs_TKkGzyirG-F5gekvSsJM7WLa53Bpg&signed_in=true&callback=initMap" async defer></script>
   </body>

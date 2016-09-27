@@ -1,5 +1,5 @@
 .mf_footer {
-	background-color: $black;
+	background-color: $semi-black;
 	color: $white;
 	padding: gutter(5);
 	text-align: center;
@@ -10,7 +10,7 @@
 		line-height: 1em;
 	}
 
-	@media screen and (min-width: $screen-width) {
-		padding: gutter(9);
+	@media #{$breakpoint-medium} {
+		// padding: gutter(9);
 	}
 }

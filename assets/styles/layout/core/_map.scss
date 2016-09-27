@@ -1,8 +1,8 @@
 .mf_map-section {
 	background-color: $white;
-    height: 485px;
+  height: 404px;
 
-    @media screen and (min-width: $screen-width) {
-	    @include span(9 last);
+  @media #{$breakpoint-medium} {
+
 	}
 }

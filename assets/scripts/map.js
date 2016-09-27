@@ -98,7 +98,7 @@ function Tour_startUp(stopsCollection) {
                 itemsCounter += subitemsCounter;
                 batches.push(subBatch);
                 wayptsExist = itemsCounter < stops.length;
-                // If it runs again there are still points. Minus 1 before continuing to 
+                // If it runs again there are still points. Minus 1 before continuing to
                 // start up with end of previous tour leg
                 itemsCounter--;
             }
@@ -131,7 +131,7 @@ function Tour_startUp(stopsCollection) {
 
                             var unsortedResult = { order: kk, result: result };
                             unsortedResults.push(unsortedResult);
-                            
+
                             directionsResultsReturned++;
 
                             if (directionsResultsReturned == batches.length) // we've received all the results. put to map
@@ -145,7 +145,7 @@ function Tour_startUp(stopsCollection) {
                                             if (count == 0) // first results. new up the combinedResults object
                                                 combinedResults = unsortedResults[key].result;
                                             else {
-                                                // only building up legs, overview_path, and bounds in my consolidated object. This is not a complete 
+                                                // only building up legs, overview_path, and bounds in my consolidated object. This is not a complete
                                                 // directionResults object, but enough to draw a path on the map, which is all I need
                                                 combinedResults.routes[0].legs = combinedResults.routes[0].legs.concat(unsortedResults[key].result.routes[0].legs);
                                                 combinedResults.routes[0].overview_path = combinedResults.routes[0].overview_path.concat(unsortedResults[key].result.routes[0].overview_path);

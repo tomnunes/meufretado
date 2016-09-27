@@ -1,6 +1,6 @@
 .mf_address-list {
-    margin: gutter(5) 0;
-    padding: 0;
+    margin: 0;
+    padding: 8px 0;
     // -moz-column-count: 2;
     // -moz-column-gap: 2em;
     // -webkit-column-count: 2;
@@ -9,25 +9,26 @@
     // column-gap: 2em;
 
     dt {
+        color: $kettle;
         font-size: 16px;
         line-height: 1.6em;
-        border-bottom: 1px solid $black;
-        padding-bottom: 5px;
-        margin-bottom: 10px;
         vertical-align: middle;
 
         &:after {
-            @include mf_triangle-down($black,9px);
+            @include mf_triangle-down($kettle,9px);
             content: "";
             display: inline-block;
             vertical-align: middle;
         }
     }
     dd {
-        margin: 0;
+        border-top: 1px solid $semi-black;
+        display: none;
+        margin: 5px 0 10px;
+        padding: 15px 0 0;
     }
 
-    @media screen and (min-width: $screen-width) {
+    @media #{$breakpoint-medium} {
         // @include span(3);
         // display: inline-block;
     }
@@ -36,7 +37,7 @@
         list-style-position: inside;
         margin: 0;
         padding: 0;
-        
+
         li {
     	    font-size: 11px;
     	    line-height: 2em;

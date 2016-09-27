@@ -1,0 +1,43 @@
+$grid-columns: 12;
+$grid-max-width: 61.25em;
+
+$breakpoint-medium: "only screen and (min-width: 48em)";
+
+.mf_limit {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.625em;
+    padding-right: 0.625em;
+    width: 100%;
+
+    &:before,
+    &:after {
+        @extend .mf_clear-fix;
+    }
+}
+.mf_row_ {
+    margin: 0 -0.625em;
+
+    &:before,
+    &:after {
+        @extend .mf_clear-fix;
+    }
+}
+
+[class*='mf_col-'] {
+    float: left;
+    padding: 0 0.625em;
+    width: 100%;
+    min-height: 1px;
+}
+
+@media #{$breakpoint-medium} {
+    .mf_limit {
+        max-width: $grid-max-width;
+    }
+    @for $i from 1 through $grid-columns {
+        .mf_col-#{$i} {
+            width: 100% / $grid-columns * $i;
+        }
+    }
+}
