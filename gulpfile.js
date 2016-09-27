@@ -6,6 +6,7 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
 var cleanCSS = require('gulp-clean-css');
+var surge = require('gulp-surge')
 
 // Compile Our Sass
 gulp.task('styles', function() {
@@ -39,6 +40,13 @@ gulp.task('lint', function() {
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
+
+gulp.task('deploy', [], function () {
+  return surge({
+    project: './',         // Path to your static build directory
+    domain: 'meufretado.surge.sh'  // Your domain or Surge subdomain
+  })
+})
 
 // Watch Files For Changes
 gulp.task('watch', function() {
